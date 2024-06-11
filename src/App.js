@@ -10,16 +10,18 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 function App() {
 
     let [lecoBalance, setLecoBalance] = useState('');
-
+    let [fname, setFname] = useState('');
     let getNewUser = async (user) => {
         let formData = {
             leco : user.leco,
+            name : user.fname
         }
         try {
             const response = await axios.post('http://localhost:3000/check-balance', formData);
             console.log(response);
             setLecoBalance(response.data.balance);
             //console.log(lecoBalance);
+            setFname(response.data.name);
         } catch (error) {
             console.error(error);
         }
@@ -31,7 +33,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<Sigin />} />
                 <Route path="/signup" element={<Signup getNewUser={getNewUser} />} />
-                <Route path="/dashboard" element={<Dashboard lecoBalance={lecoBalance} />} />
+                <Route path="/dashboard" element={<Dashboard lecoBalance={lecoBalance} fname={fname}/>} />
             </Routes>
         </div>
     );
