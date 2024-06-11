@@ -1,25 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Signup from "./Components/Forms/Signup";
+import { useState } from "react";
+import axios from "axios";
+import Home from "./Components/Home/Home";
+import { Routes, Route } from "react-router-dom";
+import Sigin from "./Components/Forms/Sigin";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    let [lecoBalance, setLecoBalance] = useState(0);
+
+    let getNewUser = async (user) => {
+        let formData = {
+            leco : user.leco,
+        }
+        try {
+            const response = await axios.post('http://localhost:3000/check-balance', formData);
+            console.log(response);
+            setLecoBalance(response.data.leco);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signin" element={<Sigin />} />
+                <Route path="/signup" element={<Signup getNewUser={getNewUser} />} />
+                <Route path="/dashboard" element={<Dashboard lecoBalance={lecoBalance} />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
