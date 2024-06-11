@@ -1,6 +1,6 @@
 import './App.css';
 import Signup from "./Components/Forms/Signup";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import Home from "./Components/Home/Home";
 import { Routes, Route } from "react-router-dom";
@@ -9,7 +9,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
 
-    let [lecoBalance, setLecoBalance] = useState(0);
+    let [lecoBalance, setLecoBalance] = useState('');
 
     let getNewUser = async (user) => {
         let formData = {
@@ -18,7 +18,8 @@ function App() {
         try {
             const response = await axios.post('http://localhost:3000/check-balance', formData);
             console.log(response);
-            setLecoBalance(response.data.leco);
+            setLecoBalance(response.data.balance);
+            //console.log(lecoBalance);
         } catch (error) {
             console.error(error);
         }

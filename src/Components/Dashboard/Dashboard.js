@@ -5,13 +5,16 @@ import {NavLink} from "react-router-dom"; // Importing the UserCircleIcon and Lo
 export default function Dashboard(props) {
 
     const balances = {
-        leco: 5000,
-        nwsdb: 3000,
-        slt: 7000,
+        nwsdb: 4712.19,
+        slt: 8848.11,
     };
+    let showResponse = ()=>{
+        alert("This function is under operation")
+    }
 
 
-    const totalBalance = Object.values(balances).reduce((acc, curr) => acc + curr, 0);
+    const totalBalance = Object.values(balances).reduce((acc, curr) => acc + curr, Number(props.lecoBalance)).toFixed(2);
+
 
 
     return (
@@ -53,7 +56,7 @@ export default function Dashboard(props) {
 
             <div className="mt-8">
                 <button className="bg-black text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-800"
-                        onClick={() => alert("This function is under operation.")}>
+                       onClick={showResponse}>
                     View Details
                 </button>
             </div>

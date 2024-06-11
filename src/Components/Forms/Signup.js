@@ -5,7 +5,7 @@ export default function Signup(props) {
 
     let [userInput, setUserInput] = useState({
         fname : '', lname : '', email : '',password: '',
-        rePassword: '', leco : '', nwsdb :'',
+        rePassword: '', leco : '', nwsdb :'', slt: '',
         district : 'colombo', street : '', city : '', ZIP : ''
     });
 
@@ -67,6 +67,14 @@ export default function Signup(props) {
             }
         })
     }
+    let onChangeSLT = (event) =>{
+        setUserInput((preve)=>{
+            return{
+                ...preve,
+                slt : event.target.value
+            }
+        })
+    }
     let onChangeDistrict = (event) =>{
         setUserInput((preve)=>{
             return{
@@ -104,18 +112,18 @@ export default function Signup(props) {
     let onSubmitHandler = (event) =>{
         event.preventDefault()
         let { fname , lname , email ,password, rePassword, leco , nwsdb,
-            district , street, city , ZIP } = userInput
+           slt , district , street, city , ZIP } = userInput
 
         let user = {
             fname : fname , lname : lname , email : email, password: password,
-            rePassword: rePassword,leco : leco, nwsdb : nwsdb,
+            rePassword: rePassword,leco : leco, nwsdb : nwsdb,slt : slt,
             district :district , street : street, city : city, ZIP : ZIP
         }
         // console.log(user)
         props.getNewUser(user)
         setUserInput({
             fname : '', lname : '', email : '',password: '',
-            rePassword: '', leco : '', nwsdb :'',
+            rePassword: '', leco : '', nwsdb :'',slt : '',
             district : 'colombo', street : '', city : '', ZIP : ''
         })
         navigate('/dashboard')
@@ -262,6 +270,23 @@ export default function Signup(props) {
                                         type="text"
                                         name="nwsdb"
                                         id="nwsdb"
+                                        className="block w-full rounded-md  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="slt"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    SLT Account Number
+                                </label>
+                                <div className="mt-2">
+                                    <input
+                                        value={userInput.slt}
+                                        onChange={onChangeSLT}
+                                        type="text"
+                                        name="slt"
+                                        id="slt"
                                         className="block w-full rounded-md  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                 </div>
