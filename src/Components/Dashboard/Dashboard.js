@@ -19,7 +19,7 @@ export default function Dashboard(props) {
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center">
                     <UserCircleIcon className="h-8 w-8 mr-2 text-gray-800" />
-                    <p className="text-lg font-semibold text-gray-800">Welcome, {props.fname}</p>
+                    <p className="text-lg font-semibold text-gray-800">Welcome, {props.fname} </p>
                 </div>
                 <NavLink to='/'>
                     <button className="text-gray-500 hover:text-gray-800">

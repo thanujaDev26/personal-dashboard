@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <div className="flex h-screen justify-center items-center">
             <div className="space-x-4">
-                <Link to="/dashboard">
+                <Link to="/signin">
                     <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
                         Sign In
                     </button>

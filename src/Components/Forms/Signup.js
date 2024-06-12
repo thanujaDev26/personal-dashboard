@@ -115,12 +115,13 @@ export default function Signup(props) {
            slt , district , street, city , ZIP } = userInput
 
         let user = {
-            fname : fname , lname : lname , email : email, password: password,
-            rePassword: rePassword,leco : leco, nwsdb : nwsdb,slt : slt,
+            fname : fname , lname : lname , email : email, password1: password,
+            password2: rePassword,leco : leco, nwsdb : nwsdb,slt : slt,
             district :district , street : street, city : city, ZIP : ZIP
         }
         // console.log(user)
         props.getNewUser(user)
+
         setUserInput({
             fname : '', lname : '', email : '',password: '',
             rePassword: '', leco : '', nwsdb :'',slt : '',

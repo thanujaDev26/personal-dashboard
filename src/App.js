@@ -1,6 +1,6 @@
 import './App.css';
 import Signup from "./Components/Forms/Signup";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Home from "./Components/Home/Home";
 import { Routes, Route } from "react-router-dom";
@@ -8,24 +8,23 @@ import Sigin from "./Components/Forms/Sigin";
 import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
+    const [lecoBalance, setLecoBalance] = useState('');
+    const [fname, setFname] = useState('');
 
-    let [lecoBalance, setLecoBalance] = useState('');
-    let [fname, setFname] = useState('');
-    let getNewUser = async (user) => {
-        let formData = {
-            leco : user.leco,
-            name : user.fname
-        }
+    const getNewUser = async (user) => {
+
         try {
-            const response = await axios.post('http://localhost:3000/check-balance', formData);
-            console.log(response);
-            setLecoBalance(response.data.balance);
-            //console.log(lecoBalance);
-            setFname(response.data.name);
+            const response = await axios.post('http://localhost:3000/signup', user);
+            console.log('Received response from backend:', response.data);
+
+            // Assuming response.data contains the necessary data
+            setLecoBalance(response.data.leco);
+            setFname(response.data.lname);
         } catch (error) {
-            console.error(error);
+            console.error('Error occurred during signup:', error);
         }
-    }
+
+    };
 
     return (
         <div>
@@ -33,7 +32,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<Sigin />} />
                 <Route path="/signup" element={<Signup getNewUser={getNewUser} />} />
-                <Route path="/dashboard" element={<Dashboard lecoBalance={lecoBalance} fname={fname}/>} />
+                <Route path="/dashboard" element={<Dashboard lecoBalance={lecoBalance} fname={fname} />} />
             </Routes>
         </div>
     );
